@@ -1,0 +1,12 @@
+{
+  "name": "nightwatch-sauce-example",
+  "version": "0.0.0",
+  "description": "An example of using the Nightwatch with Sauce Labs' browser cloud to run tests",
+  "scripts": {
+    "test": "DATE_WITH_TIME=`date +%Y%m%d-%H%M%S` nightwatch --config nightwatch.js --env chrome,ie11,firefox"
+  },
+  "author": "Sauce Labs",
+  "devDependencies": {
+    "nightwatch": "0.9.19"
+  }
+}
