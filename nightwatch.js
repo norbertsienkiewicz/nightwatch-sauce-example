@@ -11,7 +11,7 @@ process.env.SAUCE_TUNNEL_ID = cfg.tunnelId;
 process.env.SAUCE_URL = cfg.url;
 
 module.exports = {
-  src_folders: ['./test/gineaPig.js'],
+  src_folders: ['./test/gineaPigLong.js'],
   test_settings : {
     default: {
       launch_url: 'http://ondemand.saucelabs.com:80',
@@ -34,6 +34,7 @@ module.exports = {
     chrome: {
       desiredCapabilities: {
         browserName: 'chrome',
+        recordMp4: true,
       },
     },
     ie11: {
@@ -41,11 +42,13 @@ module.exports = {
         browserName: 'internet explorer',
         platform: 'Windows 10',
         version: '11.0',
+        recordMp4: true,
       },
     },
     firefox: {
       desiredCapabilities: {
         browserName: 'firefox',
+        recordMp4: true,
       }
     },
   },
