@@ -34,7 +34,6 @@ module.exports = {
     chrome: {
       desiredCapabilities: {
         browserName: 'chrome',
-        recordMp4: true,
       },
     },
     ie11: {
