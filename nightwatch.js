@@ -8,15 +8,15 @@ console.log('username:', cfg.username, 'build name:', buildName);
 process.env.SAUCE_USERNAME = cfg.username;
 process.env.SAUCE_ACCESS_KEY = cfg.accessKey;
 process.env.SAUCE_TUNNEL_ID = cfg.tunnelId;
-process.env.SAUCE_URL = cfg.url;
+const SAUCE_URL = cfg.url || 'ondemand.saucelabs.com';
 
 module.exports = {
   src_folders: ['./test/gineaPigLong.js'],
   test_settings : {
     default: {
-      launch_url: 'http://ondemand.saucelabs.com:80',
+      launch_url: `http://${SAUCE_URL}:80`,
       selenium_port: 80,
-      selenium_host: 'ondemand.saucelabs.com',
+      selenium_host: SAUCE_URL,
       silent: true,
       username: process.env.SAUCE_USERNAME,
       access_key: process.env.SAUCE_ACCESS_KEY,
