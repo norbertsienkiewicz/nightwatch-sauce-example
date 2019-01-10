@@ -28,7 +28,7 @@ module.exports = {
             .pause(2000)
             .setValue('#fbemail', 'hello 3!')
             .setValue('#comments', 'foo bar baz 3')
-            .click('#submit')
+            .click('#submit3123123123')
             .assert.containsText('#your_comments', 'yyyyyyyyyyyyyyy')
             .end();
     },
