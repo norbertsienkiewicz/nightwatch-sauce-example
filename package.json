@@ -7,6 +7,6 @@
   },
   "author": "Sauce Labs",
   "devDependencies": {
-    "nightwatch": "1.0.14"
+    "nightwatch": "1.0.18"
   }
 }
