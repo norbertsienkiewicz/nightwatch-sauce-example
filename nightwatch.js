@@ -12,7 +12,7 @@ const SAUCE_URL = cfg.url || 'ondemand.saucelabs.com';
 
 module.exports = {
   src_folders: ['./test/gineaPigLong.js'],
-  //src_folders: ['./test/gineaFailing.js'],
+  // src_folders: ['./test/gineaFailing.js'],
   test_settings : {
     default: {
       launch_url: `http://${SAUCE_URL}:80`,
@@ -35,7 +35,8 @@ module.exports = {
     chrome: {
       desiredCapabilities: {
         browserName: 'chrome',
-        extendedDebugging : true,
+        extendedDebugging: true,
+        capturePerformance: true,
       },
     },
     ie11: {
