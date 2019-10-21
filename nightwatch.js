@@ -1,21 +1,31 @@
-var configName = process.env.SAUCE_CFG || process.env.SAUCE_USERNAME;
-var cfg = require('./sauce-' + configName);
+var cfg = require('./accounts.json');
+
+if (!process.env.SAUCE_USER) {
+  console.error('Please provide SAUCE_USER venv');
+  process.exit(1);
+}
 var now = new Date();
 var buildName = `nightwatch-e2e-debug-${process.env.DATE_WITH_TIME || now.getTime()}`;
+var user = cfg.data[process.env.SAUCE_USER];
+var testFile = cfg.settings[process.env.type] || 'guineaPig.js';
 
-console.log('username:', cfg.username, 'build name:', buildName);
+console.info('username:', user.username, 'build name:', buildName);
 
-process.env.SAUCE_USERNAME = cfg.username;
-process.env.SAUCE_ACCESS_KEY = cfg.accessKey;
-process.env.SAUCE_TUNNEL_ID = cfg.tunnelId;
-const SAUCE_URL = cfg.url || 'ondemand.saucelabs.com';
+if (user.disabled) {
+  console.error('user ', user.username, ' is disabled in settings.');
+  process.exit(1);
+}
+
+process.env.SAUCE_USERNAME = user.username;
+process.env.SAUCE_ACCESS_KEY = user.accessKey;
+process.env.SAUCE_TUNNEL_ID = user.tunnelId;
+const SAUCE_URL = user.url || 'ondemand.saucelabs.com';
 
 module.exports = {
-  src_folders: ['./test/gineaPigLong.js'],
-  // src_folders: ['./test/gineaFailing.js'],
+  src_folders: ['./test/' + testFile],
   test_settings : {
     default: {
-      launch_url: `http://${SAUCE_URL}:80`,
+      launch_url: `https://${SAUCE_URL}:443`,
       selenium_port: 80,
       selenium_host: SAUCE_URL,
       silent: true,
@@ -29,14 +39,14 @@ module.exports = {
         waitForConditionTimeout: 10000,
       },
       desiredCapabilities: {
-				build: buildName
+        build: buildName,
+        extendedDebugging: true,
+        capturePerformance: true,
 			}
     },
     chrome: {
       desiredCapabilities: {
         browserName: 'chrome',
-        extendedDebugging: true,
-        capturePerformance: true,
       },
     },
     ie11: {

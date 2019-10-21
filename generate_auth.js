@@ -1,9 +1,14 @@
 const crypto = require('crypto');
 
-var configName = process.env.SAUCE_CFG || process.env.SAUCE_USERNAME;
-var cfg = require('./sauce-' + configName);
+var cfg = require('./accounts.json');
 
-const key = `${cfg.username}:${cfg.accessKey}`
+if (!process.env.SAUCE_USER) {
+  console.error('Please provide SAUCE_USER venv');
+  process.exit(1);
+}
+var user = cfg.data[process.env.SAUCE_USER];
+
+const key = `${user.username}:${user.accessKey}`
 const jobId = process.env.JOB_ID || process.argv[2];
 
 console.log(`Finding hmac for\nkey: ${key}\njobId: ${jobId}`);

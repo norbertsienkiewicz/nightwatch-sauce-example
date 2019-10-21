@@ -16,4 +16,4 @@ node_modules
 tests_output
 
 # Ignore json file with credentials
-sauce-*.json
+accounts.json
