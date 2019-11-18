@@ -5,7 +5,7 @@ if (!process.env.SAUCE_USER) {
   process.exit(1);
 }
 var now = new Date();
-var buildName = `nightwatch-e2e-debug-${process.env.DATE_WITH_TIME || now.getTime()}`;
+var buildName = process.env.BUILD_NAME || `nightwatch-e2e-debug-${process.env.DATE_WITH_TIME || now.getTime()}`;
 var user = cfg.data[process.env.SAUCE_USER];
 var testFile = cfg.settings[process.env.type] || 'guineaPig.js';
 
